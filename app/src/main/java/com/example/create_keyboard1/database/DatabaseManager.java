@@ -11,10 +11,6 @@ import com.example.create_keyboard1.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Maihan Nijat on 2016-12-30.
- */
-
 public class DatabaseManager {
 
     private final Context mContext;
