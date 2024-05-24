@@ -30,7 +30,6 @@ public class ImageFrag extends Fragment {
         // Inflate the layout for this fragment
         final  View view=inflater.inflate(R.layout.fragment_image, container, false);
         recyclerView=view.findViewById(R.id.recyclerview);
-//        myimg=new ArrayList<ImageModel>();
 
         myimg.add(new ImageModel(R.drawable.img1,"Dessert"));
         myimg.add(new ImageModel(R.drawable.img2,"Sun Set"));
