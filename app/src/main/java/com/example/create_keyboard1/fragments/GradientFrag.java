@@ -30,7 +30,6 @@ public class GradientFrag extends Fragment {
 
         final  View view=inflater.inflate(R.layout.fragment_gradient, container, false);
         recyclerView=view.findViewById(R.id.recyclerview);
-//        mygradient=new ArrayList<Model>();
         mygradient.add(new Model(R.drawable.gradient_0,"One"));
         mygradient.add(new Model(R.drawable.gradient_1,"Two"));
         mygradient.add(new Model(R.drawable.gradient_2,"Three"));
@@ -40,9 +39,6 @@ public class GradientFrag extends Fragment {
         mygradient.add(new Model(R.drawable.gradient_6,"Seven"));
         mygradient.add(new Model(R.drawable.gradient_7,"Eight"));
         mygradient.add(new Model(R.drawable.gradient_8,"Nine"));
-
-
-
 
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
