@@ -71,17 +71,6 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
             @Override
             public void onClick(View v) {
 
-               // Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),arrayList.get(position).getTheme_image());
-
-//                Drawable drawable = context.getResources().getDrawable(arrayList.get(position).getTheme_image());
-//                Bitmap bmp = ((BitmapDrawable)drawable).getBitmap();
-//
-//                SharedPreferences sharedPreferences1 = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences1.edit();
-//                editor.putString(GROUPSNAME_SHARED_PREF, encodeTobase64(bmp));
-//                editor.commit();
-//                editor.apply();
-
                 SharedPreferences sharedPreferences1 = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences1.edit();
                 editor.putString(GROUPSNAME_SHARED_PREF, "gradient");
