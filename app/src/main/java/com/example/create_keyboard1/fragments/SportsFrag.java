@@ -30,7 +30,6 @@ public class SportsFrag extends Fragment {
         // Inflate the layout for this fragment
         final  View view=inflater.inflate(R.layout.fragment_sports, container, false);
         recyclerView=view.findViewById(R.id.recyclerview);
-//        mysport=new ArrayList<SportModel>();
 
         mysport.add(new SportModel(R.drawable.spt1,"Cricket"));
         mysport.add(new SportModel(R.drawable.spt2,"Badminton"));
