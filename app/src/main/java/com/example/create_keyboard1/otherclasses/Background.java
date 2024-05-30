@@ -107,7 +107,6 @@ public class Background extends AppCompatActivity {
 
     public  void bannerNative(){
         mNativeBannerAd = new NativeBannerAd(this, getResources().getString(R.string.FbBannerAd));
-        //mNativeBannerAd = new NativeBannerAd(this, "#YOUR_PLACEMENT_ID");
         NativeAdListener nativeAdListener = new NativeAdListener() {
 
             @Override
