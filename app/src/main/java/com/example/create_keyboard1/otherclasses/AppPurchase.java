@@ -12,10 +12,10 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 
 public class AppPurchase {
 
-    public static final String PRODUCT_IDW = "freeads";  //no capital word and number included
-    public static final String PRODUCT_ID2M = "freeads";  //no capital word and number included
-    public static final String PRODUCT_ID3M = "freeads";  //no capital word and number included
-    public static final String PRODUCT_IDL = "freeads";  //no capital word and number included
+    public static final String PRODUCT_IDW = "freeads";  
+    public static final String PRODUCT_ID2M = "freeads"; 
+    public static final String PRODUCT_ID3M = "freeads"; 
+    public static final String PRODUCT_IDL = "freeads";  
     public static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjJx6GWVx4C9iDOR3Of5wmIK7G4NHsApsIQjJKSM2mqN54488du";
     public static final String MERCHANT_ID = "14275035111230084880";
     public static BillingProcessor bp;
@@ -29,7 +29,6 @@ public class AppPurchase {
                 purchase = true;
             }
             else {
-              // purchase = false;
                 purchase = true;
             }
         } catch (Exception e) {
@@ -48,8 +47,6 @@ public class AppPurchase {
             bp = new BillingProcessor(mContext, LICENSE_KEY, MERCHANT_ID, new BillingProcessor.IBillingHandler() {
                 @Override
                 public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-
-//                updateTextViews();
                 }
 
                 @Override
@@ -59,20 +56,17 @@ public class AppPurchase {
 
                 @Override
                 public void onBillingInitialized() {
-//                showToast("onBillingInitialized");
                     readyToPurchase = true;
-//                updateTextViews();
+
                 }
 
 
                 @Override
                 public void onPurchaseHistoryRestored() {
-//                showToast("onPurchaseHistoryRestored");
                     for (String sku : bp.listOwnedProducts())
                         Log.d(LOG_TAG, "Owned Managed Product: " + sku);
                     for (String sku : bp.listOwnedSubscriptions())
                         Log.d(LOG_TAG, "Owned Subscription: " + sku);
-//                updateTextViews();
                 }
 
             });
