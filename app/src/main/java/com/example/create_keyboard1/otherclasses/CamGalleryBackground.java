@@ -110,7 +110,6 @@ public class CamGalleryBackground extends AppCompatActivity {
     }
 
 
-    // method for bitmap to base64
     public static String encodeTobase64(Bitmap image) {
         Bitmap immage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -121,8 +120,6 @@ public class CamGalleryBackground extends AppCompatActivity {
         return imageEncoded;
     }
 
-
-    //choose img and pick gallery fun
     private void chooseimage() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -199,33 +196,6 @@ public class CamGalleryBackground extends AppCompatActivity {
         File storedirir = new File(Environment.getExternalStorageDirectory(), "FbWADownloader/WaImage");
         File myDir = new File(String.valueOf(storedirir));
         myDir.mkdirs();
-
-
-//        File myDir = new File(Environment.getExternalStorageDirectory().getPath() + "/My AppMaker");
-////        String filename = String.format("%d.jpg", System.currentTimeMillis());
-////        File outfile = new File(myDir, filename);
-//        if (!myDir.exists()) {
-//            myDir.mkdirs();
-//        }
-//        String filename = String.format("%d.jpg", System.currentTimeMillis());
-//        File outfile = new File(myDir, filename);
-//
-//        try {
-//            FileOutputStream fileOutputStream = new FileOutputStream(outfile);
-//            b.compress(Bitmap.CompressFormat.JPEG
-//                    , 100, fileOutputStream);
-//            fileOutputStream.flush();
-//            fileOutputStream.close();
-//            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//            intent.setData(Uri.fromFile(outfile));
-//            sendBroadcast(intent);
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
 
     }
 
