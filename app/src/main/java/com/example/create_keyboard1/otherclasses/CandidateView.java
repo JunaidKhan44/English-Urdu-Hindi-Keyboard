@@ -49,11 +49,6 @@ public class CandidateView extends View {
 
     private GestureDetector mGestureDetector;
 
-    /**
-     * Construct a CandidateView for showing suggested words for completion.
-     *
-     * @param context
-     */
     public CandidateView(Context context) {
         super(context);
 
@@ -106,11 +101,6 @@ public class CandidateView extends View {
         setVerticalScrollBarEnabled(false);
     }
 
-    /**
-     * A connection back to the service to communicate with the text field
-     *
-     * @param listener
-     */
     public void setService(SimpleIME listener) {
         mService = listener;
     }
@@ -124,22 +114,14 @@ public class CandidateView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int measuredWidth = resolveSize(50, widthMeasureSpec);
 
-        // Get the desired height of the icon menu view (last row of items does
-        // not have a divider below)
         Rect padding = new Rect();
         mSelectionHighlight.getPadding(padding);
         final int desiredHeight = ((int) mPaint.getTextSize()) + mVerticalPadding
                 + padding.top + padding.bottom + extraHeight;
-
-        // Maximum possible width and desired height
         setMeasuredDimension(measuredWidth,
                 resolveSize(desiredHeight, heightMeasureSpec));
     }
 
-    /**
-     * If the canvas is null, then only touch calculations are performed to pick the target
-     * candidate.
-     */
     @Override
     protected void onDraw(Canvas canvas) {
         if (canvas != null) {
@@ -165,7 +147,6 @@ public class CandidateView extends View {
         final boolean typedWordValid = mTypedWordValid;
         final int y = (int) (((height - mPaint.getTextSize()) / 2) - mPaint.ascent());
         for (int i = 0; i < count; i++) {
-            // Break the loop. This fix the app from crashing.
             if(i >= MAX_SUGGESTIONS){
                 break;
             }
@@ -235,7 +216,6 @@ public class CandidateView extends View {
         mTypedWordValid = typedWordValid;
         scrollTo(0, 0);
         mTargetScrollX = 0;
-        // Compute the total width
         onDraw(null);
         invalidate();
         requestLayout();
@@ -264,7 +244,6 @@ public class CandidateView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (y <= 0) {
-                    // Fling up!?
                     if (mSelectedIndex >= 0) {
                         mService.pickSuggestionManually(mSelectedIndex);
                         mSelectedIndex = -1;
@@ -286,16 +265,10 @@ public class CandidateView extends View {
         return true;
     }
 
-    /**
-     * For flick through from keyboard, call this method with the x coordinate of the flick
-     * gesture.
-     *
-     * @param x
-     */
     @SuppressLint("WrongCall")
     public void takeSuggestionAt(float x) {
         mTouchX = (int) x;
-        // To detect candidate
+    
         onDraw(null);
         if (mSelectedIndex >= 0) {
             mService.pickSuggestionManually(mSelectedIndex);
