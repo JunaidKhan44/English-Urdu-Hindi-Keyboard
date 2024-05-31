@@ -73,8 +73,6 @@ public class InAppPurchase extends AppCompatActivity implements  BillingProcesso
 
             @Override
             public void onInterstitialDismissed(Ad ad) {
-
-                // Interstitial dismissed callback
                 Log.e("mytag", "Interstitial ad dismissed.");
                 startActivity(new Intent(getApplicationContext(), MainMenu.class));
                 finish();
@@ -83,40 +81,30 @@ public class InAppPurchase extends AppCompatActivity implements  BillingProcesso
 
             @Override
             public void onError(Ad ad, AdError adError) {
-                // Ad error callback
                 Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
                 Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
 
             }
 
             @Override
             public void onAdClicked(Ad ad) {
-                // Ad clicked callback
                 Log.d("mytag", "Interstitial ad clicked!");
             }
 
             @Override
             public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
                 Log.d("mytag", "Interstitial ad impression logged!");
             }
         };
 
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
         interstitialAd.loadAd(
                 interstitialAd.buildLoadAdConfig()
                         .withAdListener(interstitialAdListener)
                         .build());
-
-
-        //
-
     }
 
     @Override
