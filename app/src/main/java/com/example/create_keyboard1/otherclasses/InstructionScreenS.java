@@ -36,7 +36,6 @@ public class InstructionScreenS extends AppCompatActivity {
             bannerNative();
         }
 
-        //analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "4");
