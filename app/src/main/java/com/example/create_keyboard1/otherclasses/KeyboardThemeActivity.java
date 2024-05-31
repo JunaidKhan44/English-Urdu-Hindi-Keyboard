@@ -43,16 +43,12 @@ public class KeyboardThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyboard_theme);
 
-
         loadingtxt=findViewById(R.id.loadtxt);
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(KeyboardThemeActivity.this,
                     R.color.buttondark));
         }
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.buttoncolor));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0099CD")));
 
 
@@ -60,7 +56,6 @@ public class KeyboardThemeActivity extends AppCompatActivity {
             bannerNative();
         }
 
-        //analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "3");
@@ -83,7 +78,6 @@ public class KeyboardThemeActivity extends AppCompatActivity {
 
     public  void bannerNative(){
         mNativeBannerAd = new NativeBannerAd(this, getResources().getString(R.string.FbBannerAd));
-        //mNativeBannerAd = new NativeBannerAd(this, "#YOUR_PLACEMENT_ID");
         NativeAdListener nativeAdListener = new NativeAdListener() {
 
             @Override
