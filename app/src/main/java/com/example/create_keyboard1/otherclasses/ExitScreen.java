@@ -37,9 +37,6 @@ public class ExitScreen extends AppCompatActivity {
         setContentView(R.layout.activity_exit_screen);
         getSupportActionBar().hide();
 
-
-
-        //analytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "5");
@@ -77,7 +74,6 @@ public class ExitScreen extends AppCompatActivity {
 
         AudienceNetworkAds.initialize(this);
         nativeAd = new NativeAd(this, getResources().getString(R.string.FbNativeAd));
-        //nativeAd = new NativeAd(this, "#YOUR_PLACEMENT_ID");
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -86,7 +82,6 @@ public class ExitScreen extends AppCompatActivity {
 
             @Override
             public void onAdLoaded(Ad ad) {
-                // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
                         .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
