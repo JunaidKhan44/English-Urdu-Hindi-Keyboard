@@ -42,64 +42,9 @@ public class SettingActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(SettingActivity.this,
                     R.color.buttondark));
         }
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.buttoncolor));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0099CD")));
 
         initialize();
-
-//        chkprediction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(chkprediction.isChecked()) {
-//                    if (SimpleIME.mPredictionOn == false) {
-//                        SimpleIME.mPredictionOn = true;
-//                        Toast.makeText(SettingActivity.this, "prediction is on", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                if(!chkprediction.isChecked()){
-//                        SimpleIME.mPredictionOn=false;
-//                        Toast.makeText(SettingActivity.this, "prediction is off", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//            }
-//
-//
-//        });
-//        chkvibrate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(chkvibrate.isChecked())
-//                    Toast.makeText(SettingActivity.this, "vibrate is on", Toast.LENGTH_SHORT).show();
-//                else
-//                    Toast.makeText(SettingActivity.this, "vibrate is off", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        chkpreview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(chkpreview.isChecked()){
-//                    SharedPreferences previewpreference = getApplicationContext().getSharedPreferences(PREVIEW_PREF_NAME, Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = previewpreference.edit();
-//                    editor.putInt(POSITION_AD_PREVIEW,1);
-//                    editor.commit();
-//                    editor.apply();
-//                    Toast.makeText(SettingActivity.this, "Preview Enable", Toast.LENGTH_SHORT).show();
-//                    Log.d("simpleime","set :"+1);
-//                }
-//                else{
-//
-//                    SharedPreferences previewpreference = getApplicationContext().getSharedPreferences(PREVIEW_PREF_NAME, Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = previewpreference.edit();
-//                    editor.putInt(POSITION_AD_PREVIEW,0);
-//                    editor.commit();
-//                    editor.apply();
-//                    Toast.makeText(SettingActivity.this, "Preview Disable", Toast.LENGTH_SHORT).show();
-//                    Log.d("simpleime","set :"+0);
-//                }
-//
-//            }
-//        });
 
         cardbackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,10 +91,6 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        
- //       chkpreview=findViewById(R.id.checked1);
-//        chkprediction=findViewById(R.id.checked2);
-//        chkvibrate=findViewById(R.id.checked3);
         cardbackground=findViewById(R.id.t4);
         cardenable=findViewById(R.id.t5);
         cardset=findViewById(R.id.t6);
@@ -173,8 +114,6 @@ public class SettingActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
-
 
 
 }
