@@ -38,7 +38,6 @@ public class PrivacyPolicy extends AppCompatActivity {
     TextView  txt5;
     private NativeAd nativeAd;
 
-    //Shared Preference
     public static final String SHARED_PREF_PRIVACY = "policy";
     public static final String PRIVACY_SHARED_PREF = "privacy";
 
@@ -95,7 +94,6 @@ public class PrivacyPolicy extends AppCompatActivity {
     }
 
     public void movetomain(View view) {
-//        startActivity(new Intent(getApplicationContext(), MainMenu.class));
         SharedPreferences sharedPreferences1 = this.getSharedPreferences(SHARED_PREF_PRIVACY, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences1.edit();
         editor.putString(PRIVACY_SHARED_PREF, "yes");
@@ -111,7 +109,6 @@ public class PrivacyPolicy extends AppCompatActivity {
 
         AudienceNetworkAds.initialize(this);
         nativeAd = new NativeAd(this, getResources().getString(R.string.FbNativeAd));
-        //nativeAd = new NativeAd(this, "#YOUR_PLACEMENT_ID");
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
@@ -120,7 +117,6 @@ public class PrivacyPolicy extends AppCompatActivity {
 
             @Override
             public void onAdLoaded(Ad ad) {
-                // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
                         .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
