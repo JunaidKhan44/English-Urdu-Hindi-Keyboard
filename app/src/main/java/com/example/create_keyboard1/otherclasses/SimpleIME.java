@@ -82,7 +82,7 @@ public class SimpleIME extends InputMethodService
     boolean sphenglish, sphurdu, sphhindu;
     public static InputConnection ic;
     public boolean flagforemoji = false;
-    // public static KeyboardView kv;
+
     public KeyboardView obj;
     public View kv;
     public Keyboard keyboard;
@@ -91,7 +91,6 @@ public class SimpleIME extends InputMethodService
     private boolean caps = false;
     public boolean isflagforurdu = false;
     private boolean flagforenglish = false;
-    //new urdu key code---------
     private SharedPreferences sharedPreferences2;
     private int mLastDisplayWidth;
     private InputMethodManager mInputMethodManager;
@@ -127,11 +126,11 @@ public class SimpleIME extends InputMethodService
         forpreview = getSharedPreferences(PREVIEW_PREF_NAME, MODE_PRIVATE);
         int isval = forpreview.getInt(POSITION_AD_PREVIEW, 1);
         if (isval == 0) {
-            //    kv.setPreviewEnabled(false);
+
             Log.d("simpleime", "" + 0);
         }
         if (isval == 1) {
-            //  kv.setPreviewEnabled(true);
+       
             Log.d("simpleime", "" + 1);
         }
 
@@ -175,7 +174,7 @@ public class SimpleIME extends InputMethodService
            callbackground();
        }
 
-        // Close popup keyboard when screen is touched, if it's showing
+    
         obj.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 //  kv.closing();
@@ -214,7 +213,6 @@ public class SimpleIME extends InputMethodService
                 flagforemoji = true;
                 keyboard = new Keyboard(getBaseContext(), R.xml.emojis);
                 obj.setKeyboard(keyboard);
-//                    obj.setOnKeyboardActionListener(this);
                 sphurdu = false;
                 sphenglish = true;
                 sphhindu = false;
@@ -224,14 +222,6 @@ public class SimpleIME extends InputMethodService
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mic.setBackgroundResource(R.drawable.animation);
-//                wifiAnimation = (AnimationDrawable) mic.getBackground();
-//                wifiAnimation.start();
-
-//
-//                mic.setScaleX(1.2f);
-//                mic.setScaleY(1.3f);
-//                mic.setImageResource(R.drawable.ic_microphone_1);
 
                 micFunForAll();
 
@@ -248,12 +238,6 @@ public class SimpleIME extends InputMethodService
                         mic.setBackground(getResources().getDrawable(R.drawable.background1));
                         mic.setScaleX(1f);
                         mic.setScaleY(1f);
-
-                     //   wifiAnimation.setOneShot(true);
-                        // wifiAnimation.stop();
-                        // wifiAnimation.selectDrawable(0);
-                        // wifiAnimation.setVisible(false, true);
-                        //     mic.setImageResource(R.drawable.ic_baseline_mic_24);
                     }
                 }, 5000);
 
@@ -266,9 +250,6 @@ public class SimpleIME extends InputMethodService
     @Override
     public void onInitializeInterface() {
         if (keyboard != null) {
-            // Configuration changes can happen after the keyboard gets recreated,
-            // so we need to be able to re-build the keyboards if the available
-            // space has changed.
             int displayWidth = getMaxWidth();
             if (displayWidth == mLastDisplayWidth) return;
             mLastDisplayWidth = displayWidth;
@@ -281,8 +262,6 @@ public class SimpleIME extends InputMethodService
         super.onCreate();
         mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         mWordSeparators = getResources().getString(R.string.word_separators);
-
-        //optional line may commit
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
@@ -309,11 +288,10 @@ public class SimpleIME extends InputMethodService
         mCompletionOn = false;
         mCompletions = null;
 
-        // We are now going to initialize our state based on the type of
-        // text being edited.
+      
         switch (attribute.inputType & InputType.TYPE_MASK_CLASS) {
             case InputType.TYPE_CLASS_NUMBER:
-                // mCurKeyboard = mNumbersKeyboard;
+             
                 break;
             case InputType.TYPE_CLASS_DATETIME:
                 // Numbers and dates default to the symbols keyboard, with
