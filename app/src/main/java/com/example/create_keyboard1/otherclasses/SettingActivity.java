@@ -105,7 +105,6 @@ public class SettingActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //set what would happen when positive button is clicked
                         InputMethodManager imeManager = (InputMethodManager)
                                 getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
                         imeManager.showInputMethodPicker();
