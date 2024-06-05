@@ -122,7 +122,6 @@ public class SimpleIME extends InputMethodService
         initializeView();
         mic.setImageResource(R.drawable.ic_baseline_mic_24);
 
-        //for preview purpose
         forpreview = getSharedPreferences(PREVIEW_PREF_NAME, MODE_PRIVATE);
         int isval = forpreview.getInt(POSITION_AD_PREVIEW, 1);
         if (isval == 0) {
@@ -133,8 +132,7 @@ public class SimpleIME extends InputMethodService
        
             Log.d("simpleime", "" + 1);
         }
-
-        //for theme purpose
+            
         sharedPreferences2 = getSharedPreferences(SHARED_PREF_NAME1, MODE_PRIVATE);
         int pos1 = sharedPreferences2.getInt(POSITION_AD1, 0);
         if (pos1 == 0) {
@@ -280,7 +278,6 @@ public class SimpleIME extends InputMethodService
         mComposing.setLength(0);
         updateCandidates();
         if (!restarting) {
-            // Clear shift states.
             mMetaState = 0;
         }
 
@@ -294,79 +291,41 @@ public class SimpleIME extends InputMethodService
              
                 break;
             case InputType.TYPE_CLASS_DATETIME:
-                // Numbers and dates default to the symbols keyboard, with
-                // no extra features.
                 //mCurKeyboard = mSymbolsKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_PHONE:
-                // Phones will also default to the symbols keyboard, though
-                // often you will want to have a dedicated phone keyboard.
                 //mCurKeyboard = mPhoneKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
-                // This is general text editing.  We will default to the
-                // normal alphabetic keyboard, and assume that we should
-                // be doing predictive text (showing candidates as the
-                // user types).
                 //mCurKeyboard = getSelectedSubtype();
                 mPredictionOn = sharedPreferences.getBoolean("suggestion", true);
-
-                // We now look for a few special variations of text that will
-                // modify our behavior.
                 int variation = attribute.inputType & InputType.TYPE_MASK_VARIATION;
                 if (variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
                         variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    // Do not display predictions / what the user is typing
-                    // when they are entering a password.
                     mPredictionOn = false;
                 }
 
                 if (variation == InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                         || variation == InputType.TYPE_TEXT_VARIATION_URI
                         || variation == InputType.TYPE_TEXT_VARIATION_FILTER) {
-                    // Our predictions are not useful for e-mail addresses
-                    // or URIs.
                     mPredictionOn = false;
-                    //  mActiveKeyboard = "en_US";
-                    // mCurKeyboard = mQwertyKeyboard;
                 }
 
                 if ((attribute.inputType & InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE) != 0) {
-                    // If this is an auto-complete text view, then our predictions
-                    // will not be shown and instead we will allow the editor
-                    // to supply their own.  We only show the editor's
-                    // candidates when in fullscreen mode, otherwise relying
-                    // own it displaying its own UI.
                     mPredictionOn = false;
                     mCompletionOn = isFullscreenMode();
                 }
-
-                // We also want to look at the current state of the editor
-                // to decide whether our alphabetic keyboard should start out
-                // shifted.
-                //   updateShiftKeyState(attribute);
                 break;
 
             default:
-                // For all unknown input types, default to the alphabetic
-                // keyboard with no special features.
-                // mCurKeyboard = getSelectedSubtype();
                 // updateShiftKeyState(attribute);
         }
-//        if (mCurKeyboard == mPashtoLatinKeyboard || mCurKeyboard == mPashtoLatinShiftedKeyboard)
-//            mPredictionOn = false;
         if (mPredictionOn) db = new DatabaseManager(this);
-
-        // Update the label on the enter key, depending on what the application
-        // says it will do.
         keyboard.setImeOptions(getResources(), attribute.imeOptions);
 
         mSound = sharedPreferences.getBoolean("sound", true);
-
-        // Apply the selected keyboard to the input view.
-        // setLatinKeyboard(mCurKeyboard);
     }
 
     @Override
@@ -398,11 +357,9 @@ public class SimpleIME extends InputMethodService
         int isval = forpreview.getInt(POSITION_AD_PREVIEW, 1);
         if (isval == 0) {
             //    kv.setPreviewEnabled(false);
-            //  Log.d("simpleime","onstat "+0);
         }
         if (isval == 1) {
             //  kv.setPreviewEnabled(true);
-            //    Log.d("simpleime","onstat "+1);
         }
 
 
@@ -763,16 +720,6 @@ public class SimpleIME extends InputMethodService
                 sphhindu = false;
 
             }
-//            else if (primaryCode == -12) {
-//                flagforemoji = true;
-//                keyboard = new Keyboard(this, R.xml.emojis);
-//                obj.setKeyboard(keyboard);
-//                obj.setOnKeyboardActionListener(this);
-//
-//                sphurdu = false;
-//                sphenglish = true;
-//                sphhindu = false;
-//            }
             else if (primaryCode == 0x0730) {
 
                 keyboard = new Keyboard(this, R.xml.time_emoji);
@@ -833,9 +780,6 @@ public class SimpleIME extends InputMethodService
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // If we want to do transformations on text being entered with a hard
-        // keyboard, we need to process the up events to update the meta key
-        // state we are tracking.
         if (PROCESS_HARD_KEYS) {
             if (mPredictionOn) {
                 mMetaState = MetaKeyKeyListener.handleKeyUp(mMetaState,
@@ -1065,12 +1009,6 @@ public class SimpleIME extends InputMethodService
 
     public void onPress(int primaryCode) {
         obj.setPreviewEnabled(true);
-
-        // Disable preview key on Shift, Delete, Space, Language, Symbol and Emoticon.
-//        if (primaryCode == -1 || primaryCode == -5 || primaryCode == -2 || primaryCode == -10000
-//                || primaryCode == -101 || primaryCode == 32) {
-//            kv.setPreviewEnabled(false);
-//        }
     }
 
     public void onRelease(int primaryCode) {
