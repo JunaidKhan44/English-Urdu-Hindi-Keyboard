@@ -490,18 +490,11 @@ public class SimpleIME extends InputMethodService
                 return false;
 
             default:
-                // For all other keys, if we want to do transformations on
-                // text being entered with a hard keyboard, we need to process
-                // it and do the appropriate action.
                 if (PROCESS_HARD_KEYS) {
                     if (keyCode == KeyEvent.KEYCODE_SPACE
                             && (event.getMetaState() & KeyEvent.META_ALT_ON) != 0) {
-                        // A silly example: in our input method, Alt+Space
-                        // is a shortcut for 'android' in lower case.
                         InputConnection ic = getCurrentInputConnection();
                         if (ic != null) {
-                            // First, tell the editor that it is no longer in the
-                            // shift state, since we are consuming this.
                             ic.clearMetaKeyStates(KeyEvent.META_ALT_ON);
                             keyDownUp(KeyEvent.KEYCODE_A);
                             keyDownUp(KeyEvent.KEYCODE_N);
@@ -553,10 +546,8 @@ public class SimpleIME extends InputMethodService
             default:
 
         }
-        /////////////////////////////////////////////
 
         if (isWordSeparator(primaryCode)) {
-            // Handle separator
             if (mComposing.length() > 0) {
                 commitTyped(getCurrentInputConnection());
                 Log.d("mytagfor", "world separator");
@@ -566,7 +557,6 @@ public class SimpleIME extends InputMethodService
                     clearCandidateView();
                 }
 
-                // Add update word in the dictionary
                 try {
                     addUpdateWord();
                 } catch (Exception e) {
@@ -586,19 +576,15 @@ public class SimpleIME extends InputMethodService
             // Show Emoticons
 
         } else if (primaryCode == -10001) {
-            // Zero Space
             mComposing.append("\u200C");
             getCurrentInputConnection().setComposingText(mComposing, 1);
         } else if (primaryCode == -10002) {
-            // ẋ
             mComposing.append("ẋ");
             getCurrentInputConnection().setComposingText(mComposing, 1);
         } else if (primaryCode == -10003) {
-            // Ẋ
             mComposing.append("\u1E8A");
             getCurrentInputConnection().setComposingText(mComposing, 1);
         } else if (primaryCode == 1567) {
-            // Question mark.
             mComposing.append("\u061F");
             getCurrentInputConnection().setComposingText(mComposing, 1);
         } else {
@@ -761,8 +747,6 @@ public class SimpleIME extends InputMethodService
 
             } else if (flagforemoji) {
                 Log.d("mytagfor", "default emojis");
-                // mComposing.append(String.valueOf(Character.toChars(primaryCode)));
-                // getCurrentInputConnection().commitText(String.valueOf(Character.toChars(primaryCode)), 1);
                 try {
                     ic.commitText(String.valueOf(Character.toChars(primaryCode)), 1);
 
@@ -775,7 +759,7 @@ public class SimpleIME extends InputMethodService
             }
         }
 
-        if (mSound) playClick(primaryCode); // Play sound with button click.
+        if (mSound) playClick(primaryCode); 
     }
 
     @Override
@@ -790,9 +774,6 @@ public class SimpleIME extends InputMethodService
         return super.onKeyUp(keyCode, event);
     }
 
-    /**
-     * Helper function to commit any text being composed in to the editor.
-     */
     private void commitTyped(InputConnection inputConnection) {
         if (mComposing.length() > 0) {
             inputConnection.commitText(mComposing, mComposing.length());
@@ -801,9 +782,7 @@ public class SimpleIME extends InputMethodService
         }
     }
 
-    /**
-     * Helper to determine if a given character code is alphabetic.
-     */
+   
     private boolean isAlphabet(int code) {
         return Character.isLetter(code);
     }
@@ -903,7 +882,6 @@ public class SimpleIME extends InputMethodService
         } else {
             keyDownUp(KeyEvent.KEYCODE_DEL);
         }
-        //    updateShiftKeyState(getCurrentInputEditorInfo());
     }
 
     private void handleShift() {
@@ -923,7 +901,6 @@ public class SimpleIME extends InputMethodService
         if (isAlphabet(primaryCode) && mPredictionOn) {
             mComposing.append((char) primaryCode);
             getCurrentInputConnection().setComposingText(mComposing, 1);
-            // updateShiftKeyState(getCurrentInputEditorInfo());
             updateCandidates();
             Log.d("mytagfor", "isAlphabet");
         } else {
@@ -971,7 +948,6 @@ public class SimpleIME extends InputMethodService
         pickSuggestionManually(0);
     }
 
-    // Tap on suggestion to commit
     public void pickSuggestionManually(int index) {
         if (mCompletionOn && mCompletions != null && index >= 0 && index < mCompletions.length) {
             CompletionInfo ci = mCompletions[index];
@@ -979,11 +955,8 @@ public class SimpleIME extends InputMethodService
             if (mCandidateView != null) {
                 mCandidateView.clear();
             }
-            //   updateShiftKeyState(getCurrentInputEditorInfo());
         } else if (mComposing.length() > 0) {
-            // If we were generating candidate suggestions for the current
-            // text, we would commit one of them here. But for this sample,
-            // we will just commit the current text.
+
             mComposing.setLength(index);
             mComposing = new StringBuilder(list.get(index) + " ");
             commitTyped(getCurrentInputConnection());
@@ -1013,11 +986,7 @@ public class SimpleIME extends InputMethodService
 
     public void onRelease(int primaryCode) {
     }
-
-    /**
-     * This class improves performance of the app when prediction is on.
-     * The database query is executed in the background.
-     */
+                
     private class SelectDataTask extends AsyncTask<String, Void, ArrayList<String>> {
 
         private String subType;
@@ -1043,9 +1012,6 @@ public class SimpleIME extends InputMethodService
         }
     }
 
-    /**
-     * Add or update word in the dictionary
-     */
     public void addUpdateWord() {
 
         if (!getLastWord().isEmpty()) {
@@ -1058,18 +1024,12 @@ public class SimpleIME extends InputMethodService
         }
     }
 
-    /**
-     * Return a last word from input connection with space
-     *
-     * @return
-     */
     public String getLastWord() {
         CharSequence inputChars = getCurrentInputConnection().getTextBeforeCursor(50, 0);
         String inputString = String.valueOf(inputChars);
         return inputString.substring(inputString.lastIndexOf(" ") + 1);
     }
 
-    //--------------------------
     void speechToText() {
         Toast.makeText(this, "Listening...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -1123,7 +1083,6 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onBufferReceived(byte[] buffer) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "on buffered received");
 
             }
@@ -1131,7 +1090,6 @@ public class SimpleIME extends InputMethodService
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onEndOfSpeech() {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEndOfSpeech");
                 mic.setImageResource(R.drawable.ic_baseline_mic_24);
 
@@ -1140,21 +1098,18 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onEvent(int eventType, Bundle params) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEvent");
 
             }
 
             @Override
             public void onPartialResults(Bundle partialResults) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onPartialResults");
 
             }
 
             @Override
             public void onRmsChanged(float rmsdB) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onRmsChanged");
 
             }
@@ -1221,14 +1176,12 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onBufferReceived(byte[] buffer) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "on buffered received");
 
             }
 
             @Override
             public void onEndOfSpeech() {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEndOfSpeech");
 
 
@@ -1236,21 +1189,18 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onEvent(int eventType, Bundle params) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEvent");
 
             }
 
             @Override
             public void onPartialResults(Bundle partialResults) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onPartialResults");
 
             }
 
             @Override
             public void onRmsChanged(float rmsdB) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onRmsChanged");
 
             }
@@ -1317,14 +1267,12 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onBufferReceived(byte[] buffer) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "on buffered received");
 
             }
 
             @Override
             public void onEndOfSpeech() {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEndOfSpeech");
 
 
@@ -1332,21 +1280,18 @@ public class SimpleIME extends InputMethodService
 
             @Override
             public void onEvent(int eventType, Bundle params) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onEvent");
 
             }
 
             @Override
             public void onPartialResults(Bundle partialResults) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onPartialResults");
 
             }
 
             @Override
             public void onRmsChanged(float rmsdB) {
-                // TODO Auto-generated method stub
                 Log.i("tag", "onRmsChanged");
 
             }
@@ -1437,13 +1382,6 @@ public class SimpleIME extends InputMethodService
                 })
                 .onSameThread()
                 .check();
-
-//
-//        mic.setScaleX(1f);
-//        mic.setScaleY(1f);
-//        mic.setImageResource(R.drawable.ic_baseline_mic_24);
-
-
     }
 
 
@@ -1467,7 +1405,7 @@ public class SimpleIME extends InputMethodService
     public  int checkWhichGoToApply(){
 
         SharedPreferences prefs = getSharedPreferences("Mutual", MODE_PRIVATE);
-        int idName = prefs.getInt("Mutual_no", 0); //0 is the default value.
+        int idName = prefs.getInt("Mutual_no", 0); 
         return idName;
     }
 
