@@ -51,15 +51,11 @@ public class SplashScreen extends AppCompatActivity {
         } catch (Exception e) {
         }
 
-
-
         if (!AppPurchase.checkpurchases()) {
             NativeAds();
             callinterstitial();
 
         }
-
-
 
         Handler handler1=new Handler();
         handler1.postDelayed(new Runnable() {
@@ -70,20 +66,13 @@ public class SplashScreen extends AppCompatActivity {
 
             }
         },6000);
-
-
-
-
     }
 
     public void nextactivity(View view) {
-      //  startActivity(new Intent(getApplicationContext(),MainMenu.class));
 
         if (interstitialAd != null && interstitialAd.isAdLoaded()) {
             interstitialAd.show();
         } else {
-
-
             String val=yesno();
             if(TextUtils.equals(val,"yes")){
                 Intent it = new Intent(SplashScreen.this, InAppPurchase.class);
@@ -95,10 +84,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(it);
                 finish();
             }
-
         }
-
-
     }
 
 
@@ -112,16 +98,14 @@ public class SplashScreen extends AppCompatActivity {
 
         AudienceNetworkAds.initialize(this);
         nativeAd = new NativeAd(this, getResources().getString(R.string.FbNativeAd));
-        //nativeAd = new NativeAd(this, "#YOUR_PLACEMENT_ID");
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
 
             }
-
+            
             @Override
             public void onAdLoaded(Ad ad) {
-                // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
                         .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
@@ -159,28 +143,20 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
-
-
-
     public  void callinterstitial(){
 
-        //ads
         AudienceNetworkAds.initialize(this);
 
         interstitialAd = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
-        // Create listeners for the Interstitial Ad
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
-
-                // Interstitial ad displayed callback
                 Log.e("mytag", "Interstitial ad displayed.");
             }
 
             @Override
             public void onInterstitialDismissed(Ad ad) {
 
-                // Interstitial dismissed callback
                 Log.e("mytag", "Interstitial ad dismissed.");
 
                 String val=yesno();
@@ -198,39 +174,29 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onError(Ad ad, AdError adError) {
-                // Ad error callback
                 Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
                 Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
-                // Show the ad
-                //  interstitialAd.show();
+
             }
 
             @Override
             public void onAdClicked(Ad ad) {
-                // Ad clicked callback
                 Log.d("mytag", "Interstitial ad clicked!");
             }
 
             @Override
             public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
                 Log.d("mytag", "Interstitial ad impression logged!");
             }
         };
-
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
         interstitialAd.loadAd(
                 interstitialAd.buildLoadAdConfig()
                         .withAdListener(interstitialAdListener)
                         .build());
-
-
 
     }
     @Override
@@ -240,6 +206,5 @@ public class SplashScreen extends AppCompatActivity {
         }
         super.onDestroy();
     }
-
 
 }
