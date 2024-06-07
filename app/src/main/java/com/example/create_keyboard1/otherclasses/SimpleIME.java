@@ -299,7 +299,6 @@ public class SimpleIME extends InputMethodService
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
-                //mCurKeyboard = getSelectedSubtype();
                 mPredictionOn = sharedPreferences.getBoolean("suggestion", true);
                 int variation = attribute.inputType & InputType.TYPE_MASK_VARIATION;
                 if (variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
@@ -320,7 +319,7 @@ public class SimpleIME extends InputMethodService
                 break;
 
             default:
-                // updateShiftKeyState(attribute);
+        
         }
         if (mPredictionOn) db = new DatabaseManager(this);
         keyboard.setImeOptions(getResources(), attribute.imeOptions);
@@ -368,7 +367,7 @@ public class SimpleIME extends InputMethodService
 
     @Override
     public void onCurrentInputMethodSubtypeChanged(InputMethodSubtype subtype) {
-        //    kv.setSubtypeOnSpaceKey(subtype);
+     
         String s = subtype.getLocale();
         switch (s) {
             case "ps_AF":
@@ -391,9 +390,6 @@ public class SimpleIME extends InputMethodService
 //                mCurKeyboard = mQwertyKeyboard;
 //
         }
-
-        // Apply the selected keyboard to the input view.
-        //setLatinKeyboard(mCurKeyboard);
     }
 
     @Override
@@ -564,7 +560,6 @@ public class SimpleIME extends InputMethodService
                 }
             }
             sendKey(primaryCode);
-            //        updateShiftKeyState(getCurrentInputEditorInfo());
         } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_DELETE) {
             handleBackspace();
         } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_SHIFT) {
@@ -931,7 +926,7 @@ public class SimpleIME extends InputMethodService
     }
 
     private void handleLanguageSwitch() {
-        mInputMethodManager.switchToNextInputMethod(getToken(), true /* onlyCurrentIme */);
+        mInputMethodManager.switchToNextInputMethod(getToken(), true );
     }
 
 
