@@ -38,30 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-
-/**
- * Loads an XML description of a keyboard and stores the attributes of the keys. A keyboard
- * consists of rows of keys.
- * <p>The layout file for a keyboard contains XML that looks like the following snippet:</p>
- * <pre>
- * &lt;Keyboard
- *         android:keyWidth="%10p"
- *         android:keyHeight="50px"
- *         android:horizontalGap="2px"
- *         android:verticalGap="2px" &gt;
- *     &lt;Row android:keyWidth="32px" &gt;
- *         &lt;Key android:keyLabel="A" /&gt;
- *         ...
- *     &lt;/Row&gt;
- *     ...
- * &lt;/Keyboard&gt;
- * </pre>
- *
- * @attr ref android.R.styleable#Keyboard_keyWidth
- * @attr ref android.R.styleable#Keyboard_keyHeight
- * @attr ref android.R.styleable#Keyboard_horizontalGap
- * @attr ref android.R.styleable#Keyboard_verticalGap
- */
 public class Keyboard {
 
     static final String TAG = "Keyboard";
