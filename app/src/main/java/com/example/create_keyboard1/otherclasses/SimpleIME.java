@@ -460,10 +460,6 @@ public class SimpleIME extends InputMethodService
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                // The InputMethodService already takes care of the back
-                // key for us, to dismiss the input method if it is shown.
-                // However, our keyboard could be showing a pop-up window
-                // that back should dismiss, so we first allow it to do that.
                 if (event.getRepeatCount() == 0 && kv != null) {
                     if (obj.handleBack()) {
                         return true;
@@ -472,9 +468,6 @@ public class SimpleIME extends InputMethodService
                 break;
 
             case KeyEvent.KEYCODE_DEL:
-                // Special handling of the delete key: if we currently are
-                // composing text for the user, we want to modify that instead
-                // of let the application to the delete itself.
                 if (mComposing.length() > 0) {
                     onKey(Keyboard.KEYCODE_DELETE, null);
                     return true;
@@ -482,7 +475,6 @@ public class SimpleIME extends InputMethodService
                 break;
 
             case KeyEvent.KEYCODE_ENTER:
-                // Let the underlying text editor always handle these.
                 return false;
 
             default:
