@@ -194,8 +194,6 @@ public class DatabaseManager {
         return freq;
     }
 
-    // The following methods return the database and column names from string.xml.
-
     private String getDatabaseName() {
         return mContext.getResources().getString(R.string.database_name);
     }
