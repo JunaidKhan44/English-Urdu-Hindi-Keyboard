@@ -25,9 +25,6 @@ public class SportAdapter extends  RecyclerView.Adapter<SportAdapter.MyHolder> {
 
     public Context context;
     ArrayList<SportModel> arrayList;
-
-
-
     public static final String SHARED_PREF_NAME = "myloginapp";
     public static final String GROUPSNAME_SHARED_PREF = "groupname";
     public static final String GROUPSNAME_THEME = "themename";
