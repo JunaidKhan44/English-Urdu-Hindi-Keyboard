@@ -76,14 +76,11 @@ public class Background extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 1) {
-
-
+                    
                 } else if (tab.getPosition() == 2) {
 
                 }
                 else {
-
-
                 }
             }
 
@@ -96,10 +93,8 @@ public class Background extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
             }
         });
-
 
     }
 
@@ -111,7 +106,6 @@ public class Background extends AppCompatActivity {
 
             @Override
             public void onError(Ad ad, AdError adError) {
-
             }
 
             @Override
@@ -133,24 +127,20 @@ public class Background extends AppCompatActivity {
 
             @Override
             public void onAdClicked(Ad ad) {
-
             }
 
             @Override
             public void onLoggingImpression(Ad ad) {
-
             }
 
             @Override
             public void onMediaDownloaded(Ad ad) {
-
             }
         };
         mNativeBannerAd.loadAd(
                 mNativeBannerAd.buildLoadAdConfig()
                         .withAdListener(nativeAdListener)
                         .build());
-
 
 
     }
