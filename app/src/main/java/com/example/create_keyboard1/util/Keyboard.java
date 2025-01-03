@@ -155,9 +155,11 @@ public class Keyboard {
     private int mCellHeight;
     private int[][] mGridNeighbors;
     private int mProximityThreshold;
+    
     /**
      * Number of key widths from current touch point to search for nearest keys.
      */
+    
     private static float SEARCH_DISTANCE = 1.8f;
 
     private ArrayList<Keyboard.Row> rows = new ArrayList<Row>();
